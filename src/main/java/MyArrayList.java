@@ -17,40 +17,38 @@ public class MyArrayList<E> {
         this.clazz = (Class<E>) array[0].getClass();
     }
 
-    public MyArrayList add(E value) {
+    public void add(E value) {
         if (array.length == pointer) {
             resize();
         }
         array[pointer] = value;
         pointer++;
-        return this;
     }
 
-    public MyArrayList remove(int index) {
-        //if index is bigger than count of element in array or index < 0
+    public E remove(int index) {
         if (index >= pointer || index < 0) {
             throw new IndexOutOfBoundsException();
         }
-        //if index is the last element in array of objects
         if (index == pointer - 1) {
+            E tmp = array[index];
             array[index] = null;
+
             pointer--;
-            return this;
+            return tmp;
         }
 
         if (pointer - 1 - index >= 0) {
             System.arraycopy(array, index + 1, array, index, pointer - 1 - index);
             pointer--;
-            return this;
+            return (E) this;
         }
 
-        return this;
+        return (E) this;
     }
 
-    public MyArrayList clear() {
+    public void clear() {
         this.array = (E[]) Array.newInstance(clazz, 10);
         this.pointer = 0;
-        return this;
     }
 
     public int size() {

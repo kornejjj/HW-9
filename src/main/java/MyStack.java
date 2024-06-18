@@ -1,16 +1,16 @@
 import java.util.Objects;
 
 public class MyStack<E> {
-    protected Node head;
-    protected Node end;
-    protected int countNodes;
+    private Node head;
+    private Node end;
+    private int countNodes;
     private MyLinkedList<E> myLinkedList;
 
     public MyStack() {
         this.head = null;
     }
 
-    public MyStack push(E value) {
+    public void push(E value) {
         Node node = new Node();
         node.data = value;
         //if list is empty storage in head
@@ -25,10 +25,9 @@ public class MyStack<E> {
             end = node;
         }
         countNodes++;
-        return this;
     }
 
-    public MyStack remove(int index) {
+    public void remove(int index) {
         Node currentNode = head;
         //looks for an item with an index
         while (index != 0) {
@@ -51,15 +50,14 @@ public class MyStack<E> {
             currentNode.next.previous = currentNode.previous;
             countNodes--;
         }
-        return this;
     }
 
 
-    public MyStack clear() {
+    public void clear() {
         head = null;
         end = null;
         countNodes = 0;
-        return this;
+
     }
 
 

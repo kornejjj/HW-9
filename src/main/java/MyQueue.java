@@ -1,15 +1,15 @@
 import java.util.Objects;
 
 public class MyQueue<E> {
-    protected Node head;
-    protected Node end;
-    protected int countNodes;
+    private Node<E> head;
+    private Node<E> end;
+    private int countNodes;
 
     public MyQueue() {
         this.head = null;
     }
 
-    public MyQueue add(E value) {
+    public MyQueue<E> add(E value) {
         Node node = new Node();
         node.data = value;
         //if list is empty storage in head
@@ -24,11 +24,11 @@ public class MyQueue<E> {
             end = node;
         }
         countNodes++;
-        return this;
+        return null;
     }
 
 
-    public MyQueue remove(int index) {
+    public MyQueue<E> remove(int index) {
         Node currentNode = head;
         //looks for an item with an index
         while (index != 0) {
@@ -51,15 +51,16 @@ public class MyQueue<E> {
             currentNode.next.previous = currentNode.previous;
             countNodes--;
         }
-        return this;
+
+        return null;
     }
 
 
-    public MyQueue clear() {
+    public void clear() {
         head = null;
         end = null;
         countNodes = 0;
-        return this;
+
     }
 
 
@@ -69,19 +70,19 @@ public class MyQueue<E> {
 
 
     public E peek() {
-        return head.data;
+        return (E) head.data;
     }
 
 
     public E pool() {
-        E result = head.data;
+        E result = (E) head.data;
         this.remove(0);
         return result;
     }
 
-    class Node {
-        protected Node previous;
-        protected Node next;
+    private static class Node<E> {
+        Node<E> previous;
+        Node<E> next;
         E data;
 
     }
