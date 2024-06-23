@@ -4,7 +4,7 @@ import java.util.Objects;
 public class MyHashMap<K, V> {
     private final Node<K, V>[] hashtable;
 
-    //length of hashtable array
+
     private final int multiplier;
     private int counter;
 
@@ -18,15 +18,15 @@ public class MyHashMap<K, V> {
         hashtable = new Node[multiplier];
     }
 
-    public MyHashMap put(K key, V value) {
+    public MyHashMap<K, V> put(K key, V value) {
         Node<K, V> newNode = new Node<>(key, value);
         Node start = hashtable[indexFor(newNode.hashCode())];
-        //if hashtable doesn't have elements with key.hash saving element in the first element hashtable[hash]
+
         if (start == null) {
             hashtable[indexFor(newNode.hashCode())] = newNode;
             counter++;
         } else {
-            //if hashtable already have elements with key.hash looking to element with key.equal(key) and rewrite it
+
             while (start.next != null) {
                 if (start.equals(newNode)) {
                     newNode.next = start.next;
@@ -36,26 +36,26 @@ public class MyHashMap<K, V> {
                 }
                 start = start.next;
             }
-            //if hashtable[hash] doesn't have elements with key.equal(key) saving element in the end of hashtable[hash]
+
             start.next = newNode;
             counter++;
         }
         return this;
     }
 
-    public MyHashMap remove(K key) {
+    public MyHashMap<K, V> remove(K key) {
         Node newNode = new Node<>(key, null);
         Node start = hashtable[indexFor(newNode.hashCode())];
-        //if hashtable[key.hash] if null, return
+
         if (start == null) {
             return this;
         } else {
-            //if hashtable[key.hash].equal(key) delete it
+
             if (start.equals(newNode)) {
                 hashtable[indexFor(newNode.hashCode())] = start.next;
                 counter--;
             }
-            //loking to element.equal(key) and delete it
+
             else {
                 while (start.next != null) {
                     if (start.next.equals(newNode)) {
@@ -72,10 +72,9 @@ public class MyHashMap<K, V> {
     }
 
 
-    public MyHashMap clear() {
+    public void clear() {
         Arrays.fill(hashtable, null);
         counter = 0;
-        return this;
     }
 
     public int size() {

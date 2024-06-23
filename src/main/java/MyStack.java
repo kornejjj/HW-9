@@ -1,8 +1,8 @@
 import java.util.Objects;
 
 public class MyStack<E> {
-    private Node head;
-    private Node end;
+    private Node<E> head;
+    private Node<E> end;
     private int countNodes;
     private MyLinkedList<E> myLinkedList;
 
@@ -11,14 +11,14 @@ public class MyStack<E> {
     }
 
     public void push(E value) {
-        Node node = new Node();
+        Node<E> node = new Node<>();
         node.data = value;
-        //if list is empty storage in head
+
         if (Objects.isNull(head)) {
             head = node;
             end = node;
         }
-        // if list is not empty storage in the end
+
         else {
             end.next = node;
             node.previous = end;
@@ -28,23 +28,23 @@ public class MyStack<E> {
     }
 
     public void remove(int index) {
-        Node currentNode = head;
-        //looks for an item with an index
+        Node<E> currentNode = head;
+
         while (index != 0) {
             index--;
             currentNode = currentNode.next;
         }
-        // if the index = 0, delete the head
+
         if (currentNode == head) {
             head = head.next;
             countNodes--;
         }
-        // if the index = last element, delete the end
+
         else if (currentNode == end) {
             end = currentNode.previous;
             countNodes--;
         }
-        //if the index  is middle element
+
         else {
             currentNode.previous.next = currentNode.next;
             currentNode.next.previous = currentNode.previous;
@@ -77,9 +77,9 @@ public class MyStack<E> {
         return result;
     }
 
-    class Node {
-        protected Node previous;
-        protected Node next;
+    class Node<E> {
+        protected Node<E> previous;
+        protected Node<E> next;
         E data;
 
     }

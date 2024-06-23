@@ -26,11 +26,12 @@ public class MyArrayList<E> {
     }
 
     public E remove(int index) {
+        E tmp = null;
         if (index >= pointer || index < 0) {
             throw new IndexOutOfBoundsException();
         }
         if (index == pointer - 1) {
-            E tmp = array[index];
+            tmp = array[index];
             array[index] = null;
 
             pointer--;
@@ -40,10 +41,9 @@ public class MyArrayList<E> {
         if (pointer - 1 - index >= 0) {
             System.arraycopy(array, index + 1, array, index, pointer - 1 - index);
             pointer--;
-            return (E) this;
         }
 
-        return (E) this;
+        return tmp;
     }
 
     public void clear() {
