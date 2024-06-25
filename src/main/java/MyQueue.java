@@ -74,7 +74,7 @@ public class MyQueue<E> {
     }
 
 
-    public E pool() {
+    public E poll() {
         E result = (E) head.data;
         this.remove(0);
         return result;

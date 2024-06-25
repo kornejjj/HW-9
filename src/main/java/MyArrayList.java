@@ -1,20 +1,13 @@
 import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public class MyArrayList<E> {
     private E[] array;
-    private final Class<E> clazz;
     private int pointer;
 
-    public MyArrayList(Class<E> clazz) {
-        this.array = (E[]) Array.newInstance(clazz, 10);
+    public MyArrayList() {
+        this.array = (E[]) new Object[10];
         this.pointer = 0;
-        this.clazz = clazz;
-    }
-
-    public MyArrayList(E[] array) {
-        this.array = array.clone();
-        this.pointer = array.length;
-        this.clazz = (Class<E>) array[0].getClass();
     }
 
     public void add(E value) {
@@ -47,7 +40,7 @@ public class MyArrayList<E> {
     }
 
     public void clear() {
-        this.array = (E[]) Array.newInstance(clazz, 10);
+        this.array = (E[]) new Object[10];
         this.pointer = 0;
     }
 
@@ -67,7 +60,7 @@ public class MyArrayList<E> {
 
     private void resize() {
         int newSize = (int) (pointer * 1.5);
-        E[] newArray = (E[]) Array.newInstance(clazz, newSize);
+        E[] newArray = Arrays.copyOf(array, newSize);
         if (pointer >= 0)
             System.arraycopy(array, 0, newArray, 0, pointer);
         array = newArray;

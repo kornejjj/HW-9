@@ -11,7 +11,7 @@ public class MyLinkedList<E> {
 
 
     public void add(E value) {
-        Node node = new Node();
+        Node<E> node = new Node<>();
         node.data = value;
 
         if (Objects.isNull(head)) {
